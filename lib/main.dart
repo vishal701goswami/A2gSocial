@@ -25,7 +25,7 @@ class _SocialAppState extends State<SocialApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Notification_tab(),
+      home: homenev(),
     );
   }
 }
