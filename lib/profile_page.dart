@@ -182,6 +182,32 @@ class _ProfilePageState extends State<ProfilePage> {
                     )
                   ],
                 ).pOnly(top: 20, left: 20, bottom: 20, right: 20),
+                ListTile(
+                  leading: Container(
+                    height: 35,
+                    width: 190,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 216, 216, 216),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                        child: Text(
+                      "Edit profile",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    )),
+                  ),
+                  trailing: Container(
+                    height: 35,
+                    width: 190,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 216, 216, 216),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                        child: Text(
+                      "Share profile",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    )),
+                  ),
+                ),
                 const MyTabsView(),
               ],
             ),

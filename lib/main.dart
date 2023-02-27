@@ -1,13 +1,4 @@
-import 'package:arghaapp/Home_page.dart';
-import 'package:arghaapp/Login.dart';
-import 'package:arghaapp/MessagesPage.dart';
-import 'package:arghaapp/Notification.dart';
-import 'package:arghaapp/call.dart';
 import 'package:arghaapp/nevbar.dart';
-import 'package:arghaapp/file_add.dart';
-import 'package:arghaapp/proflie_subpages/Privacy/Privacy.dart';
-import 'package:arghaapp/proflie_subpages/setting/Notification/Notification_setting_page.dart';
-import 'package:arghaapp/proflie_subpages/setting/Setting.dart';
 import 'package:flutter/material.dart';
 
 void main() {
