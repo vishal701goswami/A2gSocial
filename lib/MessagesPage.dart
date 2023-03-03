@@ -1,72 +1,62 @@
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:arghaapp/call.dart';
+// import 'package:arghaapp/message%20chat/MessageSection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MessagesPage extends StatelessWidget {
+class MessagesPage extends StatefulWidget {
+  const MessagesPage({super.key});
+
+  @override
+  State<MessagesPage> createState() => _MessagesPageState();
+}
+
+/// [AnimationController]s can be created with `vsync: this` because of
+/// [TickerProviderStateMixin].
+class _MessagesPageState extends State<MessagesPage>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('mike_tyler',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 19.0)),
-        elevation: 2.0,
+        elevation: 0.3,
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child:
-                const Icon(Icons.arrow_back, color: Colors.black, size: 30.0)),
-        actions: <Widget>[
-          Container(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: InkWell(
-                onTap: () => Navigator.push(
-                    context, CupertinoPageRoute(builder: (context) => Video())),
-                child: const Icon(Icons.video_call_outlined,
-                    color: Colors.black, size: 32.0),
-              )),
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-            child: const TextField(
-              decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.6)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.6)),
-                  hintText: "Search",
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                  ),
-                  border: InputBorder.none,
-                  prefixIcon: Icon(Icons.search, size: 23.0)),
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text("mr_das_here", style: TextStyle(color: Colors.black)),
+        toolbarHeight: 90,
+        actions: [search()],
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(
+              child: Text("Chats",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
             ),
-          ),
-          const SizedBox(height: 10.0),
-          const Padding(
-            padding: EdgeInsets.only(left: 20.0),
-            child: Text('Messages',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
-          ),
-          const SizedBox(height: 23.0),
-          ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return const message();
-              }),
-        ],
+            Tab(
+              child: Text("Calls",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
+            ),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: const [message(), Call_page()],
       ),
     );
   }
@@ -82,17 +72,292 @@ class message extends StatefulWidget {
 class _messageState extends State<message> {
   @override
   Widget build(BuildContext context) {
-    return const ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-      leading: CircleAvatar(
-        backgroundImage: AssetImage('assets/image/Snapchat-1869072314.jpg'),
-        radius: 30.0,
+    return Scaffold(
+      body: ListView(
+        children: [
+          InkWell(
+            // onTap: () {
+            //   Navigator.push(
+            //       context,
+            //       CupertinoPageRoute(
+            //           builder: (context) => const Message_screeen()));
+            // },
+            child: ListTile(
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+                leading: const CircleAvatar(
+                  backgroundImage:
+                      AssetImage('assets/image/Snapchat-1869072314.jpg'),
+                  radius: 30.0,
+                ),
+                title: const Text('adelle_klarke',
+                    style:
+                        TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
+                subtitle: const Text('Yeah, that seems okay',
+                    style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+                trailing: SizedBox(
+                  width: 60,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 5),
+                          child: Icon(
+                            Icons.notifications,
+                            color: Colors.blue,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Icon(
+                          Icons.camera_alt_outlined,
+                          size: 27,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          ),
+          ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+              leading: const CircleAvatar(
+                backgroundImage:
+                    AssetImage('assets/image/Snapchat-1869072314.jpg'),
+                radius: 30.0,
+              ),
+              title: const Text('adelle_klarke',
+                  style:
+                      TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
+              subtitle: const Text('Yeah, that seems okay',
+                  style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+              trailing: SizedBox(
+                width: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Icon(
+                          Icons.notifications,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        size: 27,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+          ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+              leading: const CircleAvatar(
+                backgroundImage:
+                    AssetImage('assets/image/Snapchat-1869072314.jpg'),
+                radius: 30.0,
+              ),
+              title: const Text('adelle_klarke',
+                  style:
+                      TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
+              subtitle: const Text('Yeah, that seems okay',
+                  style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+              trailing: SizedBox(
+                width: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Icon(
+                          Icons.error,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        size: 27,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+        ],
       ),
-      title: Text('adelle_klarke',
-          style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
-      subtitle: Text('Yeah, that seems okay',
-          style: TextStyle(fontSize: 14.0, color: Colors.grey)),
-      trailing: Icon(Icons.photo_camera_outlined, color: Colors.black),
+    );
+  }
+}
+
+class Call_page extends StatefulWidget {
+  const Call_page({super.key});
+
+  @override
+  State<Call_page> createState() => _Call_pageState();
+}
+
+class _Call_pageState extends State<Call_page> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(children: [
+      ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+        leading: const CircleAvatar(
+          backgroundImage: AssetImage('assets/image/Snapchat-1869072314.jpg'),
+          radius: 30.0,
+        ),
+        title: const Text('adelle_klarke',
+            style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Icon(
+              Icons.call_made_rounded,
+              size: 18,
+              color: Color.fromARGB(255, 33, 177, 38),
+            ),
+            Text('February 23, 9:56 PM',
+                style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+          ],
+        ),
+        trailing: const Icon(
+          Icons.call_rounded,
+          size: 27,
+          color: Colors.green,
+        ),
+      ),
+      ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+        leading: const CircleAvatar(
+          backgroundImage: AssetImage('assets/image/Snapchat-1869072314.jpg'),
+          radius: 30.0,
+        ),
+        title: const Text('adelle_klarke',
+            style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Icon(
+              Icons.call_made_rounded,
+              size: 18,
+              color: Color.fromARGB(255, 33, 177, 38),
+            ),
+            Text('February 23, 9:56 PM',
+                style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+          ],
+        ),
+        trailing: const Icon(
+          Icons.call_rounded,
+          size: 27,
+          color: Colors.green,
+        ),
+      ),
+      ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+        leading: const CircleAvatar(
+          backgroundImage: AssetImage('assets/image/Snapchat-1869072314.jpg'),
+          radius: 30.0,
+        ),
+        title: const Text('adelle_klarke',
+            style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Icon(
+              Icons.call_made_rounded,
+              size: 18,
+              color: Color.fromARGB(255, 33, 177, 38),
+            ),
+            Text('February 23, 9:56 PM',
+                style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+          ],
+        ),
+        trailing: const Icon(
+          Icons.call_rounded,
+          size: 27,
+          color: Colors.green,
+        ),
+      ),
+      ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+        leading: const CircleAvatar(
+          backgroundImage: AssetImage('assets/image/Snapchat-1869072314.jpg'),
+          radius: 30.0,
+        ),
+        title: const Text('adelle_klarke',
+            style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500)),
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Icon(
+              Icons.call_made_rounded,
+              size: 18,
+              color: Color.fromARGB(255, 33, 177, 38),
+            ),
+            Text('February 23, 9:56 PM',
+                style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+          ],
+        ),
+        trailing: const Icon(
+          Icons.call_rounded,
+          size: 27,
+          color: Colors.green,
+        ),
+      ),
+    ]);
+  }
+}
+
+class search extends StatefulWidget {
+  @override
+  _searchState createState() => _searchState();
+}
+
+class _searchState extends State<search> {
+  TextEditingController textController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 0, right: 0, left: 0),
+
+      /// In AnimSearchBar widget, the width, textController, onSuffixTap are required properties.
+      /// You have also control over the suffixIcon, prefixIcon, helpText and animationDurationInMilli
+      child: AnimSearchBar(
+        width: MediaQuery.of(context).size.width,
+        textController: textController,
+        onSuffixTap: () {
+          setState(() {
+            textController.clear();
+          });
+        },
+        onSubmitted: (ValueKey) {},
+      ),
     );
   }
 }

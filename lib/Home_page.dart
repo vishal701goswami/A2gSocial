@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
               ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: _posts.length,
+                  itemCount: 10,
                   itemBuilder: (context, index) {
                     return MySquare();
                   }),
