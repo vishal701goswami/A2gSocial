@@ -17,7 +17,7 @@ class _setting_pageState extends State<setting_page> {
       appBar: AppBar(
         elevation: 0.3,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
           "Settings",
           style: TextStyle(color: Colors.black),
@@ -170,13 +170,16 @@ class _setting_pageState extends State<setting_page> {
             child: Text("Logins",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 25, top: 30),
-            child: Text("Add account",
-                style: TextStyle(
-                    color: Colors.lightBlue,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold)),
+          Padding(
+            padding: const EdgeInsets.only(left: 25, top: 30),
+            child: InkWell(
+              onTap: () => Add(),
+              child: const Text("Add account",
+                  style: TextStyle(
+                      color: Colors.lightBlue,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold)),
+            ),
           ),
           const Padding(
             padding: EdgeInsets.only(left: 25, top: 30),
@@ -188,6 +191,87 @@ class _setting_pageState extends State<setting_page> {
           ),
         ],
       ),
+    );
+  }
+
+  Add() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          child: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 8,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 12),
+                      child: Text(
+                        "Add account",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 8, 8, 8),
+                            fontSize: 18),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Container(
+                      height: 1,
+                      color: const Color.fromARGB(255, 207, 207, 207),
+                    ),
+                  ),
+                  Padding(
+                      padding:
+                          const EdgeInsets.only(top: 15, left: 8, right: 8),
+                      child: Container(
+                        height: 45,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.blue,
+                        ),
+                        child: const Center(
+                            child: Text(
+                          "Log into existing account",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 14),
+                        )),
+                      )),
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Text(
+                        "Create new account",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                            fontSize: 15),
+                      ),
+                    ),
+                  ),
+                ]),
+          ),
+        );
+      },
     );
   }
 }

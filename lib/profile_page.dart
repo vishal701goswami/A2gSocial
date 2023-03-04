@@ -1,7 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:arghaapp/proflie_subpages/setting/Notification/setting/Setting.dart';
 import 'package:arghaapp/proflie_subpages/setting/Saved.dart';
-import 'package:arghaapp/proflie_subpages/setting/Setting.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -183,17 +184,25 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ).pOnly(top: 20, left: 20, bottom: 20, right: 20),
                 ListTile(
-                  leading: Container(
-                    height: 35,
-                    width: 190,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 216, 216, 216),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const Center(
-                        child: Text(
-                      "Edit profile",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    )),
+                  leading: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => const Edit_Profile()));
+                    },
+                    child: Container(
+                      height: 35,
+                      width: 190,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 216, 216, 216),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: const Center(
+                          child: Text(
+                        "Edit profile",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      )),
+                    ),
                   ),
                   trailing: Container(
                     height: 35,
@@ -407,5 +416,59 @@ class _PostsTabsProfileState extends State<PostsTabsProfile> {
             color: Colors.blue,
           ).p(2);
         });
+  }
+}
+
+class Edit_Profile extends StatefulWidget {
+  const Edit_Profile({super.key});
+
+  @override
+  State<Edit_Profile> createState() => _Edit_ProfileState();
+}
+
+class _Edit_ProfileState extends State<Edit_Profile> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text("Activity Status",
+            style: TextStyle(color: Colors.black)),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.check, size: 30, color: Colors.blue),
+          )
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.grey),
+              ),
+            ),
+          ),
+          const Center(
+              child: Padding(
+            padding: EdgeInsets.only(top: 12),
+            child: Text(
+              "Edit profile",
+              style: TextStyle(fontSize: 13, color: Colors.blue),
+            ),
+          ))
+        ],
+      ),
+    );
   }
 }
