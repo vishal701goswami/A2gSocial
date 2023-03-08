@@ -646,13 +646,13 @@ class _Close_FriendsState extends State<Close_Friends> {
         const SizedBox(
           height: 10,
         ),
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
-                return Close_friends();
+                return const Close_friends();
               }),
         )
       ]),
@@ -695,7 +695,7 @@ class _Close_friendsState extends State<Close_friends> {
                       style: TextStyle(fontSize: 14.0, color: Colors.grey)),
                 ],
               ),
-              trailing: MyStatefulWidget(),
+              trailing: const MyStatefulWidget(),
             ))
       ],
     );

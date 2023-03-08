@@ -1,4 +1,6 @@
+import 'package:arghaapp/proflie_subpages/Account/Accounts.dart';
 import 'package:arghaapp/proflie_subpages/setting/Notification/Notification_setting_page.dart';
+import 'package:arghaapp/proflie_subpages/setting/Privacy/Privacy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -85,8 +87,8 @@ class _setting_pageState extends State<setting_page> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Padding(
+            children: [
+              const Padding(
                 padding: EdgeInsets.only(top: 12, left: 20),
                 child: Icon(
                   Icons.lock_outline,
@@ -94,10 +96,18 @@ class _setting_pageState extends State<setting_page> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20, left: 15),
-                child: Text(
-                  "Privacy",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.only(top: 20, left: 15),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => const Privacy_page()));
+                  },
+                  child: const Text(
+                    "Privacy",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
                 ),
               )
             ],
@@ -105,8 +115,8 @@ class _setting_pageState extends State<setting_page> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Padding(
+            children: [
+              const Padding(
                 padding: EdgeInsets.only(top: 12, left: 20),
                 child: Icon(
                   Icons.person_outlined,
@@ -114,10 +124,18 @@ class _setting_pageState extends State<setting_page> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20, left: 15),
-                child: Text(
-                  "Account",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.only(top: 20, left: 15),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => const Account()));
+                  },
+                  child: const Text(
+                    "Account",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
                 ),
               )
             ],

@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'proflie_subpages/Account/Accounts.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
   @override
@@ -261,14 +263,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Padding(
+                    children: [
+                      const Padding(
                         padding: EdgeInsets.only(top: 18, left: 20),
                         child: Icon(Icons.group_outlined),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 22, left: 16),
-                        child: Text("Close friends"),
+                        padding: const EdgeInsets.only(top: 22, left: 16),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) =>
+                                          const Close_Friends()));
+                            },
+                            child: const Text("Close friends")),
                       ),
                     ],
                   ),
@@ -316,7 +326,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                      builder: (context) => const Saved()));
+                                      builder: (context) =>
+                                          const Saved_File()));
                             },
                             child: const Text("Saved")),
                       ),
@@ -427,6 +438,9 @@ class Edit_Profile extends StatefulWidget {
 }
 
 class _Edit_ProfileState extends State<Edit_Profile> {
+  TextEditingController Namecontroller = TextEditingController();
+  TextEditingController Usernamecontroller = TextEditingController();
+  TextEditingController Biocontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -443,30 +457,152 @@ class _Edit_ProfileState extends State<Edit_Profile> {
           )
         ],
       ),
+      body: ListView(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Container(
+                    height: 80,
+                    width: 80,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey),
+                  ),
+                ),
+              ),
+              const Center(
+                  child: Padding(
+                padding: EdgeInsets.only(top: 12),
+                child: Text(
+                  "Edit profile",
+                  style: TextStyle(fontSize: 13, color: Colors.blue),
+                ),
+              )),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: TextField(
+                  controller: Namecontroller,
+                  decoration: const InputDecoration(
+                    labelText: 'Name',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: TextField(
+                  controller: Usernamecontroller,
+                  decoration: const InputDecoration(
+                    labelText: 'Username',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: TextField(
+                  controller: Biocontroller,
+                  decoration: const InputDecoration(labelText: 'Bio'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: InkWell(
+                    onTap: () => Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => const Linksadd())),
+                    child: const Text(
+                      "Add Link",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Container(
+                  height: 1,
+                  color: const Color.fromARGB(255, 212, 212, 212),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 30, left: 12, right: 12, bottom: 12),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) =>
+                                const Personal_information()));
+                  },
+                  child: const Text(
+                    "Personal information settings",
+                    style: TextStyle(fontSize: 15, color: Colors.blue),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Container(
+                  height: 1,
+                  color: const Color.fromARGB(255, 212, 212, 212),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Linksadd extends StatefulWidget {
+  const Linksadd({super.key});
+
+  @override
+  State<Linksadd> createState() => _LinksaddState();
+}
+
+class _LinksaddState extends State<Linksadd> {
+  TextEditingController Urlcontroller = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.3,
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        title: const Text(
+          "Add Link",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.check,
+              size: 30,
+            ),
+          ),
+        ],
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.grey),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: TextField(
+              controller: Urlcontroller,
+              decoration: const InputDecoration(
+                labelText: 'URL',
               ),
             ),
           ),
-          const Center(
-              child: Padding(
-            padding: EdgeInsets.only(top: 12),
-            child: Text(
-              "Edit profile",
-              style: TextStyle(fontSize: 13, color: Colors.blue),
-            ),
-          ))
         ],
       ),
     );
