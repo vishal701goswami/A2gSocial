@@ -1,13 +1,16 @@
 import 'dart:math';
 
+import 'package:arghaapp/Like_page.dart';
 import 'package:arghaapp/colors/theme_colors.dart';
 import 'package:arghaapp/MessagesPage.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+
 import 'package:line_icons/line_icons.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+
+import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -41,12 +44,12 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 5),
+                padding: const EdgeInsets.only(right: 5),
                 child: InkWell(
                     onTap: () => Navigator.push(
                         context,
                         CupertinoPageRoute(
-                            builder: (context) => MessagesPage())),
+                            builder: (context) => const MessagesPage())),
                     child: const Icon(Icons.chat_bubble_outline_outlined)),
               )
             ],
@@ -123,6 +126,8 @@ class MySquare extends StatefulWidget {
 }
 
 class _MySquareState extends State<MySquare> {
+  TextEditingController Writetext = TextEditingController();
+  TextEditingController search_controller = TextEditingController();
   @override
   bool addTohigheLite = false;
   bool cmbscritta = false;
@@ -148,7 +153,7 @@ class _MySquareState extends State<MySquare> {
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Container(
                               height: 50,
                               width: 50,
@@ -202,11 +207,10 @@ class _MySquareState extends State<MySquare> {
                   height: 480,
                   width: MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(
-                    color: Colors.black,
-                    image: DecorationImage(
-                      image: AssetImage('assets/image/20221217_220510.jpg'),
-                      fit: BoxFit.fitHeight,
-                    ),
+                    color: Color.fromARGB(255, 110, 110, 110),
+                  ),
+                  child: PinchZoomReleaseUnzoomWidget(
+                    child: Image.asset('assets/image/20221217_220510.jpg'),
                   ),
                 ),
               ),
@@ -238,14 +242,17 @@ class _MySquareState extends State<MySquare> {
                         size: 30,
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(
+                    Padding(
+                      padding: const EdgeInsets.only(
                         top: 8,
                         left: 8,
                       ),
-                      child: Icon(
-                        CupertinoIcons.paperplane,
-                        size: 30,
+                      child: InkWell(
+                        onTap: () => sendbutton(),
+                        child: const Icon(
+                          CupertinoIcons.paperplane,
+                          size: 30,
+                        ),
                       ),
                     ),
                     const Spacer(),
@@ -285,8 +292,14 @@ class _MySquareState extends State<MySquare> {
                                 .copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
-                            child: const Text(
-                              '1M likes',
+                            child: InkWell(
+                              onTap: () => Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => const Likespage())),
+                              child: const Text(
+                                '1M likes',
+                              ),
                             ),
                           ),
 
@@ -330,6 +343,149 @@ class _MySquareState extends State<MySquare> {
               )
             ],
           )),
+    );
+  }
+
+  ///
+  ///Create share button section
+  /// Profile and Write a message... and Friends list
+  ///
+  ///
+  ///
+  sendbutton() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+        ),
+        context: context,
+        builder: (context) => SizedBox(
+              height: MediaQuery.of(context).size.height * 0.85,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 8,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 209, 208, 208),
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Container(
+                      height: 80,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.grey,
+                      ),
+                    ),
+                    title: TextField(
+                      autofocus: true,
+                      controller: Writetext,
+                      decoration: const InputDecoration(
+                        hintText: 'Write a message...',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 211, 211, 211),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                        child: TextField(
+                          autofocus: true,
+                          controller: search_controller,
+                          decoration: const InputDecoration(
+                            hintStyle: TextStyle(fontSize: 16),
+                            hintText: 'Search',
+                            suffixIcon: Icon(Icons.search),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.only(top: 8, left: 8),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: 12,
+                            itemBuilder: (context, index) {
+                              return const Friends();
+                            }),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ));
+  }
+}
+
+///
+///Create a Friends list
+///
+class Friends extends StatefulWidget {
+  const Friends({super.key});
+
+  @override
+  State<Friends> createState() => _FriendsState();
+}
+
+class _FriendsState extends State<Friends> {
+  bool cmbscritta = false;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Container(
+        height: 55,
+        width: 55,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100), color: Colors.grey),
+      ),
+      title: const Text(
+        "mr_das_here",
+        style: TextStyle(fontWeight: FontWeight.w500),
+      ),
+      subtitle: const Text(
+        "biku po",
+        style: TextStyle(color: Color.fromARGB(255, 112, 112, 112)),
+      ),
+      trailing: GestureDetector(
+        onTap: () {
+          setState(() {
+            cmbscritta = !cmbscritta;
+          });
+        },
+        child: Container(
+          height: 30,
+          width: 90,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: const Color.fromARGB(255, 226, 226, 226)),
+          child: Center(
+              child: cmbscritta
+                  ? const Text(
+                      "Following",
+                      style: TextStyle(color: Colors.blue),
+                    )
+                  : const Text("Follow")),
+        ),
+      ),
     );
   }
 }
