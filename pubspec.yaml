@@ -55,6 +55,9 @@ dependencies:
   group_radio_button: ^1.3.0
   anim_search_bar: ^2.0.3
   flutter_holo_date_picker: ^1.1.0
+  insta_image_viewer: ^1.0.2
+  pinch_zoom_release_unzoom: ^0.0.12
+  searchbar_animation: ^0.0.4
 
  
 

@@ -1,5 +1,6 @@
 import 'package:arghaapp/proflie_subpages/Account/Accounts.dart';
 import 'package:arghaapp/proflie_subpages/setting/Notification/Notification_setting_page.dart';
+import 'package:arghaapp/proflie_subpages/setting/Notification/setting/Follow_and_invite_friends.dart';
 import 'package:arghaapp/proflie_subpages/setting/Privacy/Privacy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +40,8 @@ class _setting_pageState extends State<setting_page> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Padding(
+            children: [
+              const Padding(
                 padding: EdgeInsets.only(top: 12, left: 24),
                 child: Icon(
                   Icons.person_add_alt_1_outlined,
@@ -48,10 +49,18 @@ class _setting_pageState extends State<setting_page> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20, left: 12),
-                child: Text(
-                  "Follow and invite friends",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.only(top: 20, left: 12),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => const Followingpage()));
+                  },
+                  child: const Text(
+                    "Follow and invite friends",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
                 ),
               )
             ],

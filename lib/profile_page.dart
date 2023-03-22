@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:arghaapp/proflie_subpages/setting/Notification/setting/Setting.dart';
+import 'package:arghaapp/proflie_subpages/setting/Notification/setting/counts_off%20follow.dart';
 import 'package:arghaapp/proflie_subpages/setting/Saved.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -125,15 +126,24 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        Text(
-                          "574",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 23,
-                              fontWeight: FontWeight.w500),
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) =>
+                                        const MyStatelessWidget()));
+                          },
+                          child: const Text(
+                            "574",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 23,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
-                        Text(
+                        const Text(
                           "Followers",
                           style: TextStyle(
                             color: Colors.black,
@@ -146,15 +156,24 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        Text(
-                          "574",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 23,
-                              fontWeight: FontWeight.w500),
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) =>
+                                        const MyStatelessWidget()));
+                          },
+                          child: const Text(
+                            "574",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 23,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
-                        Text(
+                        const Text(
                           "Following",
                           style: TextStyle(
                             color: Colors.black,
@@ -467,11 +486,14 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: Container(
-                    height: 80,
-                    width: 80,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.grey),
+                    height: 110,
+                    width: 110,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey,
+                        image: DecorationImage(
+                            image: AssetImage(
+                                'assets/image/IMG_20230127_103055_050.jpg'))),
                   ),
                 ),
               ),
