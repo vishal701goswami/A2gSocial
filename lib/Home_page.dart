@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:arghaapp/Like_page.dart';
 import 'package:arghaapp/colors/theme_colors.dart';
 import 'package:arghaapp/MessagesPage.dart';
+import 'package:arghaapp/search_page.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
@@ -37,10 +38,16 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 15),
-                child: Icon(
-                  LineIcons.search,
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => const Search_Page())),
+                  child: const Icon(
+                    LineIcons.search,
+                  ),
                 ),
               ),
               Padding(
@@ -60,7 +67,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               //for
-              Container(
+              SizedBox(
                   height: 130,
                   child: ListView.builder(
                       itemCount: _story.length,
@@ -143,7 +150,7 @@ class _MySquareState extends State<MySquare> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 height: 80,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
@@ -214,7 +221,7 @@ class _MySquareState extends State<MySquare> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 55,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
